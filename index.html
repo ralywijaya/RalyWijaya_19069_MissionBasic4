@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+
+    <form id="form" method="post" action="">
+        <div>
+               <label for="">nama</label>
+        <input placeholder="nama" id="nama" type="text" name="nama">
+        </div>
+     
+<div>
+    <label for="">umur</label>
+    <input placeholder="umur" id="umur" type="number" name="password"> 
+</div>
+
+<div>
+       
+    
+         
+</div>
+       
+<div>
+      <label for="">jabatan</label>
+    <input placeholder="bagian" id="jabatan" type="text" >
+</div>
+
+     <button id="btn_input" type="submit">input</button>
+  
+   
+   <div >
+<table border="" id="table_data_karyawan">
+    <th></th>
+
+</table>
+    </div>
+    </form>
+    
+    <main>
+        <!-- table buat jadwal -->
+        <div id="container_input_jadwal">
+
+      
+        <h2>buat jadwal </h2>
+        
+        <div>
+            <label for="input_jadwal">Jadwal</label>
+            <input id="input_jadwal" type="text" placeholder="Jadwal">
+        </div>
+
+        <div>
+            <label for="">Low</label>
+            <input type="checkbox" name="" id="" value="low" class="prioritas">
+            <label for="">Medium</label>
+            <input type="checkbox" name="" id="" value="medium"
+            class="prioritas">
+            <label for="">Hard</label>
+            <input type="checkbox" name="" id="" value="hard" class="prioritas">
+        </div>
+        <div><button id="btn_submit">Submit</button></div>
+
+    </div>
+        <table border="1px" id="table_jadwal">
+ <tr>
+
+ 
+        <th>Jadwal</th>
+        <th>Prioritas</th>
+        <th>waktu</th>
+        <th ><button onclick="simpan_jadwal()">simpan</button></th>
+    </tr>
+        <tr id="tr_jadwal">
+
+        </tr>
+        </table> 
+     </div>
+        
+
+     <!-- table simpan -->
+      <div id="container_box">
+ <div id="container_simpan">
+
+     
+<h2>Jadwal Simpan</h2>
+        <table id="table_simpan" border="1px">
+            <tr>
+                   <th>Jadwal</th>
+        <th>Prioritas</th>
+        <th>waktu</th>
+        <th></th>
+            </tr>
+            <tr>
+                 <button id="hapus_semua_simpan" type="button">Hapus All   </button>
+            </tr>
+        
+
+        </table></div>
+
+        <!-- table done -->
+        <div id="container_done">
+            <h2>done</h2>
+        
+        <table border="1px" id="table_done">
+            <tr>
+                <th>Jadwal done</th>
+            </tr>
+          
+        </table><button id="hapus_semua_done" type="button">Hapus All</button>
+    </div>
+   
+      </div>
+    
+
+    </main>
+
+
+ 
+ 
+   
+</body>
+<script src="main.js"></script>
+</html>
