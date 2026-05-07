@@ -1,7 +1,6 @@
 const nama = document.getElementById("nama")
 const umur = document.getElementById("umur")
 const jabatan = document.getElementById("jabatan")
-const ol = document.getElementById("ol")
 const form = document.getElementById("form")
 const btn_input = document.getElementById("btn_input")
 
@@ -101,15 +100,17 @@ const tr_jadwal = document.getElementById("tr_jadwal")
 const simpan = document.getElementById("btn_simpan")
 
 let data_jadwal = JSON.parse(localStorage.getItem("jadwal")) || []
-let data_jadwal_done = JSON.parse(localStorage.getItem("jadwa; done")) || []
+let data_jadwal_done = JSON.parse(localStorage.getItem("jadwal done")) || []
+let data_sementara=[]
 
-console.log(tr_jadwal)
 
 submit.addEventListener(("click"), () => {
     console.log("hallo")
 
     let value_jadwal = input_jadwal.value
-    let waktu = new Date().toLocaleTimeString()
+    let all_waktu=new Date()
+    let waktu = `${all_waktu.getDate()} - ${all_waktu.getMonth()} - ${all_waktu.getFullYear()} ,(${all_waktu.toLocaleTimeString()})`
+
     let value_prioritas = document.querySelectorAll(".prioritas")
 
     let loop_prioritas = []
@@ -132,7 +133,7 @@ submit.addEventListener(("click"), () => {
         return
     }
 
-    jadwal.innerHTML += `<tr class="baris_jadwal"><td>${value_jadwal}</td>
+    jadwal.innerHTML += `<tr class="baris_input_jadwal"><td>${value_jadwal}</td>
     <td>${loop_prioritas}</td>
     <td>${waktu}</td>
     <td><button class="btn_hapus">hapus</button></td></tr>`
@@ -144,15 +145,18 @@ submit.addEventListener(("click"), () => {
             e.target.parentElement.parentElement.remove()
         })
     })
-
-
-    data_jadwal.push({
+data_sementara.push({
         jadwal: value_jadwal,
         prioritas: loop_prioritas,
         waktu: waktu,
-    })
 
-    return data_jadwal
+ 
+
+  
+    }) 
+  input_jadwal.value=""
+  
+return data_sementara
 })
 
 let table_simpan = document.getElementById("table_simpan")
@@ -161,10 +165,14 @@ let table_done = document.getElementById("table_done")
 
 // input jadwal done
 function simpan_jadwal() {
-    let ar_jadwal = []
-
-    localStorage.setItem("jadwal", JSON.stringify(data_jadwal))
-
+    
+    data_jadwal.push(...data_sementara)
+   
+console.log(data_jadwal)
+   
+ localStorage.setItem("jadwal", JSON.stringify(data_jadwal))
+   
+let ar_jadwal=[]
     Object.values(data_jadwal).forEach((i) => {
         ar_jadwal.push(i)
 
@@ -189,7 +197,7 @@ function simpan_jadwal() {
 
                 let idBaris = `${data_click.jadwal}-${data_click.prioritas}-${data_click.waktu}`
 
-                console.log(item)
+               
 
                 if (item.checked) {
                     baris.classList.add("done")
@@ -217,12 +225,13 @@ function simpan_jadwal() {
             })
         })
     })
+   
 }
 
 
 // tombol hapus all simpan
 const hapusSemuaSimpan = document.getElementById("hapus_semua_simpan")
-
+ 
 hapusSemuaSimpan.addEventListener("click", () => {
     let yakin_simpan = confirm("Yakin ingin menghapus semua data simpan?")
 
@@ -232,7 +241,12 @@ hapusSemuaSimpan.addEventListener("click", () => {
     let hapus_tr_simpan = table_simpan.querySelectorAll(".baris_jadwal")
     hapus_tr_simpan.forEach(item => item.remove())
 
+    let hapus_tr_input = jadwal.querySelectorAll(".baris_input_jadwal")
+    hapus_tr_input.forEach(i => i.remove())
+data_jadwal=[]
+data_sementara=[]
     localStorage.removeItem("jadwal")
+
 })
 
 
@@ -252,7 +266,8 @@ table_done.innerHTML=""
 
         let baris = check.closest("tr")
         baris.classList.remove("done")
-
+data_jadwal_done=[]
         localStorage.removeItem("jadwal done")
+   
     })
 })
