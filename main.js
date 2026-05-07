@@ -75,18 +75,19 @@ function get_data_storge() {
     const get_data = localStorage.getItem("list data")
     let list_data = JSON.parse(get_data)
 
-    console.log(list_data, "hai")
+  
     return list_data
 }
 
 function tampilan_list() {
-    const list = get_data_storge()
+    let list = get_data_storge()
 
     list.forEach(i => {
      table_data_karyawan.innerHTML+=`<tr><td>${i.nama}</td></tr> 
 <tr><td>${i.umur}</td></tr>
 <tr><td>${i.jabatan}</td></tr>`
     })
+
 }
 
 
@@ -172,6 +173,7 @@ console.log(data_jadwal)
    
  localStorage.setItem("jadwal", JSON.stringify(data_jadwal))
    
+ table_simpan.innerHTML=""
 let ar_jadwal=[]
     Object.values(data_jadwal).forEach((i) => {
         ar_jadwal.push(i)
@@ -181,6 +183,9 @@ let ar_jadwal=[]
     <td>${i.waktu}</td>
     <td> <input type="checkbox" name="" id="" value="done" class="check_done"</td>
     </tr>`
+data_jadwal=[]
+let hapus_tr_input = jadwal.querySelectorAll(".baris_input_jadwal")
+    hapus_tr_input.forEach(i => i.remove())
 
         let check_done = document.querySelectorAll(".check_done")
 
@@ -241,8 +246,7 @@ hapusSemuaSimpan.addEventListener("click", () => {
     let hapus_tr_simpan = table_simpan.querySelectorAll(".baris_jadwal")
     hapus_tr_simpan.forEach(item => item.remove())
 
-    let hapus_tr_input = jadwal.querySelectorAll(".baris_input_jadwal")
-    hapus_tr_input.forEach(i => i.remove())
+    
 data_jadwal=[]
 data_sementara=[]
     localStorage.removeItem("jadwal")
